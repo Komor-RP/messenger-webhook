@@ -38,6 +38,8 @@ app.post('/webhook', (req, res) => {
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
         handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback && webhook_event.postback.payload === "USER_DEFINED_PAYLOAD"){
+        handleGreeting(sender_psid, webhook_event.postback);
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
@@ -83,7 +85,18 @@ app.get('/webhook', (req, res) => {
   }
 });
 
+//Handles greeting postback
+function handleGreeting(sender_psid, received_message) {
+  let response;
 
+  // Get the payload for the postback
+  let payload = received_postback.payload;
+
+  // Set the response based on the postback payload
+  response = { "text": "Hi! 👋 What can I help you with?"};
+  // Send the message to acknowledge the postback
+  callSendAPI(sender_psid, response);
+}
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
