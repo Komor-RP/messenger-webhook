@@ -28,7 +28,13 @@ app.post('/webhook', (req, res) => {
       }
       body.entry.forEach((pageEntry) => {
         // Iterate over each messaging event and handle accordingly
-        pageEntry.messaging.forEach((messagingEvent) => {
+
+        let webhook_event = pageEntry.messaging[0];
+        console.log("webhook_event:" + webhook_event);
+        console.log(pageEntry.messaging[1]);
+
+
+        /*pageEntry.messaging.forEach((messagingEvent) => {
           let webhook_event = messagingEvent;
           console.log(webhook_event);
 
@@ -50,7 +56,7 @@ app.post('/webhook', (req, res) => {
               messagingEvent
             );
           }
-        });
+        });*/
       });
     } else {
     // Returns a '404 Not Found' if event is not from a page subscription
