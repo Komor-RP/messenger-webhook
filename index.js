@@ -141,7 +141,7 @@ function handlePostback(sender_psid, received_postback) {
 
   // Get the payload for the postback
   let payload = received_postback.payload;
-  if (payload.title = "Get Started") {
+  if (payload.title == "Get Started") {
     response = payload.postback;
   }
   // Set the response based on the postback payload
