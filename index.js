@@ -41,6 +41,7 @@ app.post('/webhook', (req, res) => {
           handleMessage(sender_psid, webhook_event.message);
         } else if (webhook_event.postback && webhook_event.postback.payload === "Hi! 👋 What can I help you with?" ) {
           handleGreeting(sender_psid, webhook_event.postback.payload);
+          res.sendStatus(200);
         } else if (webhook_event.postback) {
           handlePostback(sender_psid, webhook_event.postback);
         } else {
