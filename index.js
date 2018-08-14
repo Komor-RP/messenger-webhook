@@ -22,37 +22,32 @@ app.post('/webhook', (req, res) => {
 
   // Checks this is an event from a page subscription
   if (body.object === 'page') {
-      // Iterate over each entry
-      // There may be multiple if batched
-      if (body.entry && body.entry.length <= 0){
-        return;
+
+    // Iterates over each entry - there may be multiple if batched
+    body.entry.forEach(function(entry) {
+
+      // Gets the body of the webhook event
+      let webhook_event = entry.messaging[0];
+      console.log(webhook_event);
+
+      // Get the sender PSID
+      let sender_psid = webhook_event.sender.id;
+      console.log('Sender PSID: ' + sender_psid);
+
+      // Check if the event is a message or postback and
+      // pass the event to the appropriate handler function
+      if (webhook_event.message) {
+        handleMessage(sender_psid, webhook_event.message);
+      } else if (webhook_event.postback) {
+        handlePostback(sender_psid, webhook_event.postback);
       }
-      body.entry.forEach((pageEntry) => {
-        // Iterate over each messaging event and handle accordingly
-        pageEntry.messaging.forEach((messagingEvent) => {
-          console.log({messagingEvent});
-          console.log("payload:" + messagingEvent.postback.payload);
-          if (messagingEvent.postback.title == "Get Started") {
-            handleGreetingPostback(messagingEvent.sender.id);
-          }
-          /*
-          if (messagingEvent.postback) {
-            handlePostback(messagingEvent.sender.id, messagingEvent.postback);
-          } else if (messagingEvent.message) {
-            if (messagingEvent.message.quick_reply){
-              handlePostback(messagingEvent.sender.id, messagingEvent.message.quick_reply);
-            } else{
-              handleMessage(messagingEvent.sender.id, messagingEvent.message);
-            }
-          } else {
-            console.log(
-              'Webhook received unknown messagingEvent: ',
-              messagingEvent
-            );
-          }*/
-        });
-      });
-    } else {
+
+
+    });
+
+    // Returns a '200 OK' response to all requests
+    res.status(200).send('EVENT_RECEIVED');
+  } else {
     // Returns a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
@@ -88,43 +83,6 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-//Greeting Postback Handling
-function handleGreetingPostback(sender_psid){
-  request({
-    url: `${FACEBOOK_GRAPH_API_BASE_URL}${sender_psid}`,
-    qs: {
-      access_token: process.env.PAGE_ACCESS_TOKEN,
-      fields: "first_name"
-    },
-    method: "GET"
-  }, function(error, response, body) {
-    var greeting = "";
-    if (error) {
-      console.log("Error getting user's name: " +  error);
-    } else {
-      var bodyObj = JSON.parse(body);
-      const name = bodyObj.first_name;
-      greeting = "Hi " + name + ". ";
-    }
-    const message = greeting + "Would you like to join a community of like-minded pandas in your area?";
-    const greetingPayload = {
-      "text": message,
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"Yes!",
-          "payload": START_SEARCH_YES
-        },
-        {
-          "content_type":"text",
-          "title":"No, thanks.",
-          "payload": START_SEARCH_NO
-        }
-      ]
-    };
-    callSendAPI(sender_psid, greetingPayload);
-  });
-}
 
 
 // Handles messages events
@@ -173,19 +131,22 @@ function handleMessage(sender_psid, received_message) {
 
 }
 
-
+// Handles messaging_postbacks events
 function handlePostback(sender_psid, received_postback) {
-  // Get the payload for the postback
-  const payload = received_postback.payload;
+  let response;
 
-  // Set the response and udpate db based on the postback payload
-  switch (payload){
-    case GREETING:
-      updateStatus(sender_psid, payload, handleGreetingPostback);
-      break;
-    default:
-      console.log('Cannot differentiate the payload type');
+  // Get the payload for the postback
+  let payload = received_postback.payload;
+
+  // Set the response based on the postback payload
+  if (payload === 'yes') {
+    response = { "text": "Thanks!" }
+  } else if (payload === 'no') {
+    response = { "text": "Oops, try sending another image." }
   }
+  // Send the message to acknowledge the postback
+  callSendAPI(sender_psid, response);
+
 }
 
 // Sends response messages via the Send API
