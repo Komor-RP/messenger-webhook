@@ -35,11 +35,15 @@ app.post('/webhook', (req, res) => {
           // Get the sender PSID
           let sender_psid = webhook_event.sender.id;
           console.log('Sender PSID: ' + sender_psid);
-
+          console.log('postback:' + webhook_event.postback);
+          console.log('payload:' + webhook_event.postback.payload);
           // Check if the event is a message or postback and
           // pass the event to the appropriate handler function
           if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);
+          } else if (webhook_event.postback && webhook_event.postback.payload === USER_DEFINED_PAYLOAD ) {
+            handlePostback(sender_psid, webhook_event.postback.payload);
+
           } else if (webhook_event.postback) {
             handlePostback(sender_psid, webhook_event.postback);
           } else {
@@ -140,7 +144,6 @@ function handlePostback(sender_psid, received_postback) {
 
   // Get the payload for the postback
   let payload = received_postback.payload;
-  console.log("playload:" + playload);
   if (payload.title == "Get Started") {
     response = payload;
   }
