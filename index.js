@@ -20,40 +20,37 @@ app.post('/webhook', (req, res) => {
 
   let body = req.body;
 
-
-
-  // Checks this is an event from a page subscription
   if (body.object === 'page') {
-
-    // Iterates over each entry - there may be multiple if batched
-    body.entry.forEach((entry) => {
-
-      entry.messaging.forEach((messagingEvent)) => {
-        let webhook_event = messagingEvent;
-        console.log(webhook_event);
-
-        // Get the sender PSID
-        let sender_psid = webhook_event.sender.id;
-        console.log('Sender PSID: ' + sender_psid);
-
-        // Check if the event is a message or postback and
-        // pass the event to the appropriate handler function
-        if (webhook_event.message) {
-          handleMessage(sender_psid, webhook_event.message);
-        } else if (webhook_event.postback) {
-          handlePostback(sender_psid, webhook_event.postback);
-        }
+      // Iterate over each entry
+      // There may be multiple if batched
+      if (body.entry && body.entry.length <= 0){
+        return;
       }
+      body.entry.forEach((pageEntry) => {
+        // Iterate over each messaging event and handle accordingly
+        pageEntry.messaging.forEach((messagingEvent) => {
+          let webhook_event = messagingEvent;
+          console.log(webhook_event);
 
+          // Get the sender PSID
+          let sender_psid = webhook_event.sender.id;
+          console.log('Sender PSID: ' + sender_psid);
 
-
-
-
-    });
-
-    // Returns a '200 OK' response to all requests
-    res.status(200).send('EVENT_RECEIVED');
-  } else {
+          // Check if the event is a message or postback and
+          // pass the event to the appropriate handler function
+          if (webhook_event.message) {
+            handleMessage(sender_psid, webhook_event.message);
+          } else if (webhook_event.postback) {
+            handlePostback(sender_psid, webhook_event.postback);
+          } else {
+            console.log(
+              'Webhook received unknown messagingEvent: ',
+              messagingEvent
+            );
+          }
+        });
+      });
+    } else {
     // Returns a '404 Not Found' if event is not from a page subscription
     res.sendStatus(404);
   }
