@@ -35,15 +35,13 @@ app.post('/webhook', (req, res) => {
           // Get the sender PSID
           let sender_psid = webhook_event.sender.id;
           console.log('Sender PSID: ' + sender_psid);
-          console.log('postback:' + webhook_event.postback);
-          console.log('payload:' + webhook_event.postback.payload);
+
           // Check if the event is a message or postback and
           // pass the event to the appropriate handler function
           if (webhook_event.message) {
             handleMessage(sender_psid, webhook_event.message);
           } else if (webhook_event.postback && webhook_event.postback.payload === "Hi! 👋 What can I help you with?" ) {
-            console.log('yes!!!!!');
-
+            handleGreeting(sender_psid, webhook_event.postback.payload);
           } else if (webhook_event.postback) {
             handlePostback(sender_psid, webhook_event.postback);
           } else {
@@ -90,7 +88,16 @@ app.get('/webhook', (req, res) => {
   }
 });
 
-
+// Handles greeting
+function handleGreeting(sender_psid, payload) {
+  let response;
+  console.log('yes!!');
+  // Get the payload for the postback
+  response = payload;
+  console.log(response);
+  // Send the message to acknowledge the postback
+  callSendAPI(sender_psid, response);
+}
 
 // Handles messages events
 function handleMessage(sender_psid, received_message) {
