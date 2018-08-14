@@ -32,6 +32,10 @@ app.post('/webhook', (req, res) => {
         pageEntry.messaging.forEach((messagingEvent) => {
           console.log({messagingEvent});
           console.log("payload:" + messagingEvent.postback.payload);
+          if (messagingEvent.postback.title == "Get Started") {
+            handleGreetingPostback(messagingEvent.sender.id);
+          }
+          /*
           if (messagingEvent.postback) {
             handlePostback(messagingEvent.sender.id, messagingEvent.postback);
           } else if (messagingEvent.message) {
@@ -45,7 +49,7 @@ app.post('/webhook', (req, res) => {
               'Webhook received unknown messagingEvent: ',
               messagingEvent
             );
-          }
+          }*/
         });
       });
     } else {
