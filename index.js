@@ -140,9 +140,9 @@ function handlePostback(sender_psid, received_postback) {
 
   // Get the payload for the postback
   let payload = received_postback.payload;
+  console.log("playload:" + playload);
   if (payload.title == "Get Started") {
     response = payload;
-    console.log("received_postback.payload :" + payload);
   }
   // Set the response based on the postback payload
   if (payload === 'yes') {
