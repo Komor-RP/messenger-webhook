@@ -30,8 +30,26 @@ app.post('/webhook', (req, res) => {
         // Iterate over each messaging event and handle accordingly
 
         let webhook_event = pageEntry.messaging[0];
-        console.log("webhook_event:" + webhook_event);
-        console.log(pageEntry.messaging[1]);
+        console.log("webhook_event:" + {webhook_event});
+
+        let sender_psid = webhook_event.sender.id;
+        console.log('Sender PSID: ' + sender_psid);
+
+        // Check if the event is a message or postback and
+        // pass the event to the appropriate handler function
+        if (webhook_event.message) {
+          handleMessage(sender_psid, webhook_event.message);
+        } else if (webhook_event.postback && webhook_event.postback.payload === "Hi! 👋 What can I help you with?" ) {
+          handleGreeting(sender_psid, webhook_event.postback.payload);
+        } else if (webhook_event.postback) {
+          handlePostback(sender_psid, webhook_event.postback);
+        } else {
+          console.log(
+            'Webhook received unknown messagingEvent: ',
+            messagingEvent
+          );
+        }
+
 
 
         /*pageEntry.messaging.forEach((messagingEvent) => {
