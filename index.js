@@ -31,6 +31,7 @@ app.post('/webhook', (req, res) => {
         // Iterate over each messaging event and handle accordingly
         pageEntry.messaging.forEach((messagingEvent) => {
           console.log({messagingEvent});
+          console.log("payload:" + messagingEvent.message.postback.payload);
           if (messagingEvent.postback) {
             handlePostback(messagingEvent.sender.id, messagingEvent.postback);
           } else if (messagingEvent.message) {
