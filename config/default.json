@@ -1,0 +1,6 @@
+{
+    "appSecret": "ADD YOURS HERE",
+    "pageAccessToken": "ADD YOURS HERE",
+    "validationToken": "TOKEN",
+    "serverURL": "https://messenger-app-fb.herokuapp.com/webhook"
+}
