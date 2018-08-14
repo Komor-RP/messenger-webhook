@@ -94,7 +94,7 @@ function handleGreeting(sender_psid, payload) {
   console.log('yes!!');
   // Get the payload for the postback
   response = {
-    "text": payload;
+    "text": payload
   }
   console.log(response);
   // Send the message to acknowledge the postback
