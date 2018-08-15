@@ -154,6 +154,7 @@ function receivedPostback(event) {
             sendTextMessage(senderID, "Room Service");
             break;
         case 'social_media':
+
             sendTextMessage(senderID, "social_media");
         default:
             sendTextMessage(senderID, "Postback called");
