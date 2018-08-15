@@ -188,7 +188,35 @@ function sendTextMessage(recipientId, messageText) {
  */
 function sendGetStarted(recipientId) {
   console.log("name: " + recipientId);
-    var messageData = {
+  var messageData1 = {
+      recipient: {
+          id: recipientId
+      },
+      message: {
+          attachment: {
+              type: "template",
+              payload: {
+                  template_type: "button",
+                  text: "Welcome to the Bot Hotel, I can help with any of the three requests below.",
+                  text: "Will this pass?",
+                  buttons: [{
+                      type: "postback",
+                      title: "Check in",
+                      payload: "check_in"
+                  }, {
+                      type: "postback",
+                      title: "Room Service",
+                      payload: "room_service"
+                  }, {
+                      type: "phone_number",
+                      title: "Call Reception",
+                      payload: "+16505551234"
+                  }]
+              }
+          }
+      }
+  };
+    var messageData2 = {
         recipient: {
             id: recipientId
         },
@@ -216,7 +244,8 @@ function sendGetStarted(recipientId) {
             }
         }
     };
-    callSendAPI(messageData);
+    callSendAPI(messageData1);
+    callSendAPI(messageData2);
 }
 
 /*
