@@ -80,9 +80,13 @@ app.post('/webhook', function (req, res) {
         // There may be multiple if batched
         data.entry.forEach(function (pageEntry) {
             // Iterate over each messaging event
+            console.log("!!!!!!!!!!!!!!!!!!!");
             if (pageEntry) {
+              console.log("1111111111111111");
               pageEntry.messaging.forEach(function (messagingEvent) {
+                console.log("!!!!!!!");
                   if (messagingEvent) {
+                    console.log("44444");
                     if (messagingEvent.message) {
                         receivedMessage(messagingEvent);
                     } else if (messagingEvent.postback) {
@@ -192,7 +196,7 @@ function sendTextMessage(recipientId, messageText) {
  *
  */
 function sendGetStarted(recipientId) {
-  console.log("name: " + recipientId);
+  console.log("name: " + recipientId.first_name);
   var messageData1 = {
       recipient: {
           id: recipientId
