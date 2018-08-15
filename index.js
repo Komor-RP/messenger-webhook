@@ -211,7 +211,6 @@ function sendGetStarted(recipientId) {
                 payload: {
                     template_type: "button",
                     text: "What is it that you would like help with?",
-                    text: "Will this pass?",
                     buttons: [{
                         type: "postback",
                         title: "Social Media Marketing",
@@ -224,14 +223,6 @@ function sendGetStarted(recipientId) {
                         type: "phone_number",
                         title: "Website",
                         payload: "+16505551234"
-                    }, {
-                        type: "postback",
-                        title: "Ecommerce",
-                        payload: "room_service"
-                    }, {
-                        type: "postback",
-                        title: "Graphic Design",
-                        payload: "room_service"
                     }]
                 }
             }
