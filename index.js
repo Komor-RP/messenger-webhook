@@ -213,7 +213,7 @@ function sendGetStarted(recipientId) {
         }
       ]
     };
-    callSendAPI(sender_psid, greetingPayload);
+    callSendAPI(greetingPayload);
   });
 
 
