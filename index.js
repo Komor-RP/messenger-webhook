@@ -182,7 +182,7 @@ function sendTextMessage(recipientId, messageText) {
 function sendGetStarted(recipientId) {
 
   request({
-    url: `${https://graph.facebook.com/v2.6/}${recipientId}`,
+    url: `${'https://graph.facebook.com/v2.6/'}${'recipientId'}`,
     qs: {
       access_token: process.env.PAGE_ACCESS_TOKEN,
       fields: "first_name"
