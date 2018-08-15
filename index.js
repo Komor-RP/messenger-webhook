@@ -180,7 +180,7 @@ function sendTextMessage(recipientId, messageText) {
             metadata: "DEVELOPER_DEFINED_METADATA"
         }
     };
-    callSendAPI(messageData);
+    /*callSendAPI(messageData);*/
 }
 
 /*
