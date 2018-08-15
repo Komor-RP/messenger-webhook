@@ -181,7 +181,7 @@ function sendTextMessage(recipientId, messageText) {
  */
 function sendGetStarted(recipientId) {
   console.log("name: " + recipientId.first_name);
-  getName(recipientId);
+  console.log(getName(recipientId));
   var messageData1 = {
       recipient: {
           id: recipientId
@@ -238,10 +238,9 @@ function getName(userID) {
    } else {
      var bodyObj = JSON.parse(body);
      const name = bodyObj.first_name;
-     console.log(name);
+     return name;
     }
   })
-  console.log(name);
 }
 
 /*
