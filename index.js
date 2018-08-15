@@ -80,13 +80,10 @@ app.post('/webhook', function (req, res) {
         // There may be multiple if batched
         data.entry.forEach(function (pageEntry) {
             // Iterate over each messaging event
-            console.log("!!!!!!!!!!!!!!!!!!!");
             if (pageEntry.messaging) {
-              console.log("1111111111111111");
               pageEntry.messaging.forEach(function (messagingEvent) {
-                console.log("!!!!!!!");
+
                   if (messagingEvent) {
-                    console.log("44444");
                     if (messagingEvent.message) {
                         receivedMessage(messagingEvent);
                     } else if (messagingEvent.postback) {
@@ -108,20 +105,7 @@ app.post('/webhook', function (req, res) {
     }
 });
 
-/*
- * Message Event
- *
- * This event is called when a message is sent to your page. The 'message'
- * object format can vary depending on the kind of message that was received.
- * Read more at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-received
- *
- * For this example, we're going to echo any text that we get. If we get some
- * special keywords ('button', 'generic', 'receipt'), then we'll send back
- * examples of those bubbles to illustrate the special message bubbles we've
- * created. If we receive a message with an attachment (image, video, audio),
- * then we'll simply confirm that we've received the attachment.
- *
- */
+
 function receivedMessage(event) {
     var senderID = event.sender.id;
     var recipientID = event.recipient.id;
@@ -197,6 +181,7 @@ function sendTextMessage(recipientId, messageText) {
  */
 function sendGetStarted(recipientId) {
   console.log("name: " + recipientId.first_name);
+  getName(recipientId);
   var messageData1 = {
       recipient: {
           id: recipientId
@@ -234,6 +219,29 @@ function sendGetStarted(recipientId) {
     };
     callSendAPI(messageData1);
     callSendAPI(messageData2);
+}
+
+
+//Get Sender Name based off of User id
+function getName(userID) {
+  const name;
+  request({
+   url: `${'https://graph.facebook.com/v2.6/'}${userID}`,
+   qs: {
+     access_token: process.env.PAGE_ACCESS_TOKEN,
+     fields: "first_name"
+   },
+   method: "GET"
+ }, function(error, response, body) {
+   var greeting = "";
+   if (error) {
+     console.log("Error getting user's name: " +  error);
+   } else {
+     var bodyObj = JSON.parse(body);
+     name = bodyObj.first_name;
+    }
+  })
+  console.log(name);
 }
 
 /*
