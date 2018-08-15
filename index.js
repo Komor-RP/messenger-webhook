@@ -180,7 +180,6 @@ function sendTextMessage(recipientId, messageText) {
  *
  */
 function sendGetStarted(recipientId) {
-
   request({
     url: `${'https://graph.facebook.com/v2.6/'}${recipientId}`,
     qs: {
@@ -198,22 +197,7 @@ function sendGetStarted(recipientId) {
       console.log("name: " + name);
       greeting = "Hi " + name + "! ";
     }
-    const message = greeting + "Would you like to join a community of like-minded pandas in your area?";
-    const greetingPayload = {
-      "text": message,
-      "quick_replies":[
-        {
-          "content_type":"text",
-          "title":"Yes!",
-          "payload": "yes"
-        },
-        {
-          "content_type":"text",
-          "title":"No, thanks.",
-          "payload": "no"
-        }
-      ]
-    };
+    const message = greeting + "Thank you for contacting Activate Biz!";
     var messageData1 = {
         recipient: {
             id: recipientId
@@ -223,17 +207,9 @@ function sendGetStarted(recipientId) {
         }
     };
     callSendAPI(messageData1);
+    callSendAPI(messageData2);
   });
 
-
-  var messageData1 = {
-      recipient: {
-          id: recipientId
-      },
-      message: {
-          text: "Hi! Thank you for contacting Activate Biz!"
-      }
-  };
     var messageData2 = {
         recipient: {
             id: recipientId
@@ -261,7 +237,6 @@ function sendGetStarted(recipientId) {
             }
         }
     };
-    callSendAPI(messageData2);
 }
 
 
