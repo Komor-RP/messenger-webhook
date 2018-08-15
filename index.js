@@ -195,6 +195,7 @@ function sendGetStarted(recipientId) {
     } else {
       var bodyObj = JSON.parse(body);
       const name = bodyObj.first_name;
+      console.log("name: " + name);
       greeting = "Hi " + name + "! ";
     }
     const message = greeting + "Would you like to join a community of like-minded pandas in your area?";
