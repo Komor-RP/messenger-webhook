@@ -180,7 +180,6 @@ function sendTextMessage(recipientId, messageText) {
  *
  */
 function sendGetStarted(recipientId) {
-  console.log("name3: " + getName(recipientId));
   var messageData1 = {
       recipient: {
           id: recipientId
@@ -224,7 +223,7 @@ function sendGetStarted(recipientId) {
 //Get Sender Name based off of User id
 function getName(userID) {
   let returnName = "";
-  request({
+  console.log(request({
    url: `${'https://graph.facebook.com/v2.6/'}${userID}`,
    qs: {
      access_token: process.env.PAGE_ACCESS_TOKEN,
@@ -238,10 +237,9 @@ function getName(userID) {
      var bodyObj = JSON.parse(body);
      const name = bodyObj.first_name;
      returnName = name;
-     console.log("name1: " + returnName);
+     return returnName;
     }
-  })
-  console.log("name2: " + returnName);
+  }) );
   return returnName;
 }
 
