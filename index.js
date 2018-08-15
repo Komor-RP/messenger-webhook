@@ -154,7 +154,7 @@ function receivedPostback(event) {
             sendTextMessage(senderID, "Room Service");
             break;
         case 'social_media':
-
+            console.log("switch reached");
             sendTextMessage(senderID, "social_media");
         default:
             sendTextMessage(senderID, "Postback called");
@@ -182,7 +182,7 @@ function sendTextMessage(recipientId, postback) {
             metadata: "DEVELOPER_DEFINED_METADATA"
         }
     };
-    /*callSendAPI(messageData);*/
+    callSendAPI(messageData);
 }
 
 /*
