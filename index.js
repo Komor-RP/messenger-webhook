@@ -219,7 +219,7 @@ function sendGetStarted(recipientId) {
             id: recipientId
         },
         message: {
-            text: greetingPayload
+            text: message
         }
     };
     callSendAPI(messageData1);
