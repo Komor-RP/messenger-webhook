@@ -224,6 +224,7 @@ function sendGetStarted(recipientId) {
 
 //Get Sender Name based off of User id
 function getName(userID) {
+  const name = "";
   request({
    url: `${'https://graph.facebook.com/v2.6/'}${userID}`,
    qs: {
@@ -237,10 +238,10 @@ function getName(userID) {
      console.log("Error getting user's name: " +  error);
    } else {
      var bodyObj = JSON.parse(body);
-     const name = bodyObj.first_name;
-     return name;
+     name = bodyObj.first_name;
     }
   })
+  return name;
 }
 
 /*
