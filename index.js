@@ -204,12 +204,12 @@ function sendGetStarted(recipientId) {
         {
           "content_type":"text",
           "title":"Yes!",
-          "payload": START_SEARCH_YES
+          "payload": "yes"
         },
         {
           "content_type":"text",
           "title":"No, thanks.",
-          "payload": START_SEARCH_NO
+          "payload": "no"
         }
       ]
     };
