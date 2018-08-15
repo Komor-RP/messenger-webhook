@@ -232,10 +232,6 @@ function sendGetStarted(recipientId) {
                         type: "phone_number",
                         title: "Website",
                         payload: "+16505551234"
-                    }, {
-                        type: "postback",
-                        title: "Other Thing",
-                        payload: "+16505551234"
                     }]
                 }
             }
