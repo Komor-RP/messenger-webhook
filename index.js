@@ -180,6 +180,43 @@ function sendTextMessage(recipientId, messageText) {
  *
  */
 function sendGetStarted(recipientId) {
+
+  request({
+    url: `${https://graph.facebook.com/v2.6/}${recipientId}`,
+    qs: {
+      access_token: process.env.PAGE_ACCESS_TOKEN,
+      fields: "first_name"
+    },
+    method: "GET"
+  }, function(error, response, body) {
+    var greeting = "";
+    if (error) {
+      console.log("Error getting user's name: " +  error);
+    } else {
+      var bodyObj = JSON.parse(body);
+      const name = bodyObj.first_name;
+      greeting = "Hi " + name + "! ";
+    }
+    const message = greeting + "Would you like to join a community of like-minded pandas in your area?";
+    const greetingPayload = {
+      "text": message,
+      "quick_replies":[
+        {
+          "content_type":"text",
+          "title":"Yes!",
+          "payload": START_SEARCH_YES
+        },
+        {
+          "content_type":"text",
+          "title":"No, thanks.",
+          "payload": START_SEARCH_NO
+        }
+      ]
+    };
+    callSendAPI(sender_psid, greetingPayload);
+  });
+
+
   var messageData1 = {
       recipient: {
           id: recipientId
@@ -215,7 +252,6 @@ function sendGetStarted(recipientId) {
             }
         }
     };
-    callSendAPI(messageData1);
     callSendAPI(messageData2);
 }
 
