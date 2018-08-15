@@ -188,7 +188,7 @@ function sendTextMessage(recipientId, messageText) {
  *
  */
 function sendGetStarted(recipientId) {
-  console.log("name: " + recipientID.first_name);
+  console.log("name: " + recipientId);
     var messageData = {
         recipient: {
             id: recipientId
@@ -199,6 +199,7 @@ function sendGetStarted(recipientId) {
                 payload: {
                     template_type: "button",
                     text: "Welcome to the Bot Hotel, I can help with any of the three requests below.",
+                    text: "Will this pass?",
                     buttons: [{
                         type: "postback",
                         title: "Check in",
