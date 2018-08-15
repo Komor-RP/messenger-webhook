@@ -224,7 +224,7 @@ function sendGetStarted(recipientId) {
 
 //Get Sender Name based off of User id
 function getName(userID) {
-  const name = "";
+  let name = "";
   request({
    url: `${'https://graph.facebook.com/v2.6/'}${userID}`,
    qs: {
