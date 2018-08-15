@@ -81,7 +81,7 @@ app.post('/webhook', function (req, res) {
         data.entry.forEach(function (pageEntry) {
             // Iterate over each messaging event
             console.log("!!!!!!!!!!!!!!!!!!!");
-            if (pageEntry) {
+            if (pageEntry.messaging) {
               console.log("1111111111111111");
               pageEntry.messaging.forEach(function (messagingEvent) {
                 console.log("!!!!!!!");
