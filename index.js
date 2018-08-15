@@ -82,7 +82,7 @@ app.post('/webhook', function (req, res) {
             // Iterate over each messaging event
             if (pageEntry.messaging) {
               pageEntry.messaging.forEach(function (messagingEvent) {
-
+                  console.log('COUNTER');
                   if (messagingEvent) {
                     if (messagingEvent.message) {
                         receivedMessage(messagingEvent);
@@ -178,8 +178,7 @@ function sendTextMessage(recipientId, postback) {
             id: recipientId
         },
         message: {
-            text: messageText,
-            metadata: "DEVELOPER_DEFINED_METADATA"
+            text: messageText
         }
     };
     callSendAPI(messageData);
