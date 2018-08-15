@@ -198,27 +198,7 @@ function sendGetStarted(recipientId) {
           id: recipientId
       },
       message: {
-          attachment: {
-              type: "template",
-              payload: {
-                  template_type: "button",
-                  text: "Welcome to the Bot Hotel, I can help with any of the three requests below.",
-                  text: "Will this pass?",
-                  buttons: [{
-                      type: "postback",
-                      title: "Check in",
-                      payload: "check_in"
-                  }, {
-                      type: "postback",
-                      title: "Room Service",
-                      payload: "room_service"
-                  }, {
-                      type: "phone_number",
-                      title: "Call Reception",
-                      payload: "+16505551234"
-                  }]
-              }
-          }
+          text: "Hi! Thank you for contacting Activate Biz!"
       }
   };
     var messageData2 = {
@@ -230,20 +210,28 @@ function sendGetStarted(recipientId) {
                 type: "template",
                 payload: {
                     template_type: "button",
-                    text: "Welcome to the Bot Hotel, I can help with any of the three requests below.",
+                    text: "What is it that you would like help with?",
                     text: "Will this pass?",
                     buttons: [{
                         type: "postback",
-                        title: "Check in",
+                        title: "Social Media Marketing",
                         payload: "check_in"
                     }, {
                         type: "postback",
-                        title: "Room Service",
+                        title: "Coaching & Training",
                         payload: "room_service"
                     }, {
                         type: "phone_number",
-                        title: "Call Reception",
+                        title: "Website",
                         payload: "+16505551234"
+                    }, {
+                        type: "postback",
+                        title: "Ecommerce",
+                        payload: "room_service"
+                    }, {
+                        type: "postback",
+                        title: "Graphic Design",
+                        payload: "room_service"
                     }]
                 }
             }
