@@ -188,6 +188,7 @@ function sendTextMessage(recipientId, messageText) {
  *
  */
 function sendGetStarted(recipientId) {
+  console.log("name: " + "recipientID.first_name");
     var messageData = {
         recipient: {
             id: recipientId
