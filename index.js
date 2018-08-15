@@ -214,7 +214,15 @@ function sendGetStarted(recipientId) {
         }
       ]
     };
-    callSendAPI(greetingPayload);
+    var messageData1 = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: greetingPayload
+        }
+    };
+    callSendAPI(messageData1);
   });
 
 
