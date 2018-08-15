@@ -153,6 +153,8 @@ function receivedPostback(event) {
         case 'room_service':
             sendTextMessage(senderID, "Room Service");
             break;
+        case 'social_media':
+            sendTextMessage(senderID, "social_media");
         default:
             sendTextMessage(senderID, "Postback called");
     }
@@ -162,7 +164,14 @@ function receivedPostback(event) {
  * Send a text message using the Send API.
  *
  */
-function sendTextMessage(recipientId, messageText) {
+function sendTextMessage(recipientId, postback) {
+    let messageText;
+    let socialMediaResponse = "Great! Can you give us more details about the help you need with social media?";
+
+    if (postback === "social_media") {
+      messageText = socialMediaResponse;
+    }
+
     var messageData = {
         recipient: {
             id: recipientId
@@ -223,7 +232,7 @@ function sendGetStarted(recipientId) {
                     buttons: [{
                         type: "postback",
                         title: "Social Media Marketing",
-                        payload: "check_in"
+                        payload: "social_media"
                     }, {
                         type: "postback",
                         title: "Coaching & Training",
