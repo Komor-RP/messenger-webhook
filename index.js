@@ -74,7 +74,7 @@ app.post('/webhook', function (req, res) {
                   if (messagingEvent) {
 
                     if (messagingEvent.message) {
-                      if (!messagingEvent.message.is_echo) {
+                      if (messagingEvent.message.is_echo) {
                         console.log("ECHO");
                       } else {
                           console.log('IF MESSAGING EVENT');
