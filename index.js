@@ -71,11 +71,15 @@ app.post('/webhook', function (req, res) {
             // Iterate over each messaging event
             if (pageEntry.messaging) {
               pageEntry.messaging.forEach(function (messagingEvent) {
-
                   if (messagingEvent) {
-                    console.log('IF MESSAGING EVENT');
+
                     if (messagingEvent.message && !messagingEvent.message.is_echo) {
-                        receivedMessage(messagingEvent);
+                      if (!messagingEvent.message.is_echo) {
+                        console.log("ECHO");
+                      } else {
+                          console.log('IF MESSAGING EVENT');
+                          receivedMessage(messagingEvent);
+                      }
                     } else if (messagingEvent.postback) {
                         console.log('RECEIVED MESSAGE POSTBACK COUNTER');
                         receivedPostback(messagingEvent);
