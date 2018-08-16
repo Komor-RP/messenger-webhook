@@ -82,11 +82,14 @@ app.post('/webhook', function (req, res) {
             // Iterate over each messaging event
             if (pageEntry.messaging) {
               pageEntry.messaging.forEach(function (messagingEvent) {
-                  console.log('COUNTER');
+
                   if (messagingEvent) {
+                    console.log('IF MESSAGING EVENT');
                     if (messagingEvent.message) {
+                        console.log('RECEIVED MESSAGE COUNTER');
                         receivedMessage(messagingEvent);
                     } else if (messagingEvent.postback) {
+                        console.log('RECEIVED MESSAGE POSTBACK COUNTER');
                         receivedPostback(messagingEvent);
                     } else {
                         console.log("Webhook received unknown messagingEvent: ", messagingEvent);
@@ -150,14 +153,14 @@ function receivedPostback(event) {
         case 'check_in':
             sendTextMessage(senderID, "Check In");
             break;
-        case 'room_service':
-            sendTextMessage(senderID, "Room Service");
+        case 'coaching':
+            sendTextMessage(senderID, "coaching");
             break;
         case 'social_media':
             console.log("switch reached");
             sendTextMessage(senderID, "social_media");
         default:
-            sendTextMessage(senderID, "Postback called");
+            console.log("invalid switch: " + payload);
     }
 }
 
@@ -168,9 +171,13 @@ function receivedPostback(event) {
 function sendTextMessage(recipientId, postback) {
     let messageText;
     let socialMediaResponse = "Great! Can you give us more details about the help you need with social media?";
+    let coachingResponse = "Great! What kind of training services do you require?";
+
 
     if (postback === "social_media") {
       messageText = socialMediaResponse;
+    } else if (postback === "coaching") {
+      messageText = "coachingResponse";
     }
 
     var messageData = {
@@ -236,7 +243,7 @@ function sendGetStarted(recipientId) {
                     }, {
                         type: "postback",
                         title: "Coaching & Training",
-                        payload: "room_service"
+                        payload: "coaching"
                     }, {
                         type: "phone_number",
                         title: "Website",
