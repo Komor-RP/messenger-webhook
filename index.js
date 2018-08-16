@@ -73,7 +73,7 @@ app.post('/webhook', function (req, res) {
               pageEntry.messaging.forEach(function (messagingEvent) {
                   if (messagingEvent) {
 
-                    if (messagingEvent.message && !messagingEvent.message.is_echo) {
+                    if (messagingEvent.message) {
                       if (!messagingEvent.message.is_echo) {
                         console.log("ECHO");
                       } else {
