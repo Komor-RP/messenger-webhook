@@ -177,7 +177,7 @@ function sendTextMessage(recipientId, postback) {
     if (postback === "social_media") {
       messageText = socialMediaResponse;
     } else if (postback === "coaching") {
-      messageText = "coachingResponse";
+      messageText = coachingResponse;
     }
 
     var messageData = {
