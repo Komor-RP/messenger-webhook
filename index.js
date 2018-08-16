@@ -160,7 +160,7 @@ function sendTextMessage(recipientId, postback) {
     let socialMediaResponse = "Great! Can you give us more details about the help you need with social media?";
     let coachingResponse = "Great! What kind of training services do you require?";
     let websiteResponse = "Great! Tell us more about your website needs!";
-
+    console.log("sendTextMessage called");
 
     if (postback === "social_media") {
       messageText = socialMediaResponse;
