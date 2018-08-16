@@ -39,14 +39,9 @@ const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
 // URL where the app is running (include protocol). Used to point to scripts and
 // assets located at this address.
-const SERVER_URL = (process.env.SERVER_URL) ?
-    (process.env.SERVER_URL) :
-    config.get('serverURL');
-/*
-if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
-    console.error("Missing config values");
-    process.exit(1);
-}*/
+const SERVER_URL = 'https://messenger-app-fb.herokuapp.com/webhook';
+
+
 
 /*
  * Use your own validation token. Check that the token used in the Webhook
@@ -64,13 +59,7 @@ app.get('/webhook', function (req, res) {
     }
 });
 
-/*
- * All callbacks for Messenger are POST-ed. They will be sent to the same
- * webhook. Be sure to subscribe your app to your page to receive callbacks
- * for your page.
- * https://developers.facebook.com/docs/messenger-platform/product-overview/setup#subscribe_app
- *
- */
+
 app.post('/webhook', function (req, res) {
     var data = req.body;
 
@@ -130,11 +119,7 @@ function receivedMessage(event) {
 }
 
 /*
- * Postback Event
- *
- * This event is called when a postback is tapped on a Structured Message.
- * https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback-received
- *
+ * Postback Event Handling
  */
 function receivedPostback(event) {
     var senderID = event.sender.id;
@@ -150,15 +135,14 @@ function receivedPostback(event) {
         case 'get_started':
             sendGetStarted(senderID);
             break;
-        case 'check_in':
-            sendTextMessage(senderID, "Check In");
-            break;
+        case 'social_media':
+            sendTextMessage(senderID, "social_media");
         case 'coaching':
             sendTextMessage(senderID, "coaching");
             break;
-        case 'social_media':
-            console.log("switch reached");
-            sendTextMessage(senderID, "social_media");
+        case 'website':
+            sendTextMessage(senderID, "website");
+            break;
         default:
             console.log("invalid switch: " + payload);
     }
@@ -166,18 +150,22 @@ function receivedPostback(event) {
 
 /*
  * Send a text message using the Send API.
- *
  */
 function sendTextMessage(recipientId, postback) {
     let messageText;
     let socialMediaResponse = "Great! Can you give us more details about the help you need with social media?";
     let coachingResponse = "Great! What kind of training services do you require?";
+    let websiteResponse = "Great! Tell us more about your website needs!";
 
 
     if (postback === "social_media") {
       messageText = socialMediaResponse;
     } else if (postback === "coaching") {
       messageText = coachingResponse;
+    } else if (postback === "website") {
+      messageText == websiteResponse;
+    } else {
+
     }
 
     var messageData = {
@@ -192,8 +180,7 @@ function sendTextMessage(recipientId, postback) {
 }
 
 /*
- * Send a button message using the Send API.
- *
+ * Handles get started button response
  */
 function sendGetStarted(recipientId) {
   request({
@@ -245,9 +232,9 @@ function sendGetStarted(recipientId) {
                         title: "Coaching & Training",
                         payload: "coaching"
                     }, {
-                        type: "phone_number",
+                        type: "postback",
                         title: "Website",
-                        payload: "+16505551234"
+                        payload: "website"
                     }]
                 }
             }
@@ -256,28 +243,7 @@ function sendGetStarted(recipientId) {
 }
 
 
-//Get Sender Name based off of User id
-function getName(userID) {
-  let returnName = "";
-  console.log(request({
-   url: `${'https://graph.facebook.com/v2.6/'}${userID}`,
-   qs: {
-     access_token: process.env.PAGE_ACCESS_TOKEN,
-     fields: "first_name"
-   },
-   method: "GET"
- }, function(error, response, body) {
-   if (error) {
-     console.log("Error getting user's name: " +  error);
-   } else {
-     var bodyObj = JSON.parse(body);
-     const name = bodyObj.first_name;
-     returnName = name;
-     return returnName;
-    }
-  }) );
-  return returnName;
-}
+
 
 /*
  * Call the Send API. The message data goes in the body. If successful, we'll
