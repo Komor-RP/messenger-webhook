@@ -85,8 +85,7 @@ app.post('/webhook', function (req, res) {
 
                   if (messagingEvent) {
                     console.log('IF MESSAGING EVENT');
-                    if (messagingEvent.message) {
-                        console.log('RECEIVED MESSAGE COUNTER' + messagingEvent.message.is_echo);
+                    if (messagingEvent.message && !messagingEvent.message.is_echo) {
                         receivedMessage(messagingEvent);
                     } else if (messagingEvent.postback) {
                         console.log('RECEIVED MESSAGE POSTBACK COUNTER');
