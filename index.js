@@ -76,7 +76,6 @@ app.post('/webhook', function (req, res) {
                     if (messagingEvent.message) {
                       if (messagingEvent.message.is_echo) {
                         console.log("ECHO");
-                        console.log(messagingEvent.message);
                       } else {
                           console.log('IF MESSAGING EVENT');
                           receivedMessage(messagingEvent);
@@ -162,7 +161,7 @@ function sendTextMessage(recipientId, postback) {
     let socialMediaResponse = "Great! Can you give us more details about the help you need with social media?";
     let coachingResponse = "Great! What kind of training services do you require?";
     let websiteResponse = "Great! Tell us more about your website needs!";
-    console.log("sendTextMessage called");
+
 
     if (postback === "social_media") {
       messageText = socialMediaResponse;
@@ -174,8 +173,6 @@ function sendTextMessage(recipientId, postback) {
       messageText = "";
     }
 
-    console.log(messageText);
-
     var messageData = {
         recipient: {
             id: recipientId
@@ -184,14 +181,14 @@ function sendTextMessage(recipientId, postback) {
             text: messageText
         }
     };
-    console.log(messageData);
-    console.log("end");
+
     callSendAPI(messageData);
 }
 
 /*
  * Handles get started button response
  */
+
 function sendGetStarted(recipientId) {
   request({
     url: `${'https://graph.facebook.com/v2.6/'}${recipientId}`,
@@ -219,7 +216,7 @@ function sendGetStarted(recipientId) {
             text: message
         }
     };
-    callSendAPI(messageData1);
+    let callSent = callSendAPI(messageData1);
     callSendAPI(messageData2);
   });
 
