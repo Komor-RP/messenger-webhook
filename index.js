@@ -91,13 +91,6 @@ function receivedMessage(event) {
 
     var messageText = message.text;
 
-    /*
-    if (messageText) {
-        switch (messageText) {
-            default:
-                sendTextMessage(senderID, messageText);
-        }
-    }*/
 }
 
 /*
