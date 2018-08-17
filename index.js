@@ -208,15 +208,36 @@ function sendGetStarted1(recipientId) {
       console.log("name: " + name);
       greeting = "Hi " + name + "! 👋 ";
     }
-    const message = greeting + "Thank you for contacting Activate Biz! \n testing";
+    const message = greeting + "Thank you for contacting Activate Biz! \nWhat is it that you would like help with?";
+
     var messageData = {
         recipient: {
             id: recipientId
         },
         message: {
-            text: message
+            attachment: {
+                type: "template",
+                payload: {
+                    template_type: "button",
+                    text: message,
+                    buttons: [{
+                        type: "postback",
+                        title: "Social Media Marketing",
+                        payload: "social_media"
+                    }, {
+                        type: "postback",
+                        title: "Coaching & Training",
+                        payload: "coaching"
+                    }, {
+                        type: "postback",
+                        title: "Website",
+                        payload: "website"
+                    }]
+                }
+            }
         }
     };
+
     let callSent = callSendAPI(messageData);
   });
 
