@@ -137,8 +137,7 @@ function receivedPostback(event) {
 
     switch (payload) {
         case 'get_started':
-            let firstSent = sendGetStarted1(senderID);
-            sendGetStarted2(senderID, firstSent);
+            sendGetStarted(senderID);
             break;
         case 'social_media':
             sendTextMessage(senderID, "social_media");
@@ -190,7 +189,7 @@ function sendTextMessage(recipientId, postback) {
  * Handles get started button response
  */
 
-function sendGetStarted1(recipientId) {
+function sendGetStarted(recipientId) {
   request({
     url: `${'https://graph.facebook.com/v2.6/'}${recipientId}`,
     qs: {
@@ -241,38 +240,6 @@ function sendGetStarted1(recipientId) {
     let callSent = callSendAPI(messageData);
   });
 
-}
-
-function sendGetStarted2(recipientId, sendGetStarted1) {
-  var messageData = {
-      recipient: {
-          id: recipientId
-      },
-      message: {
-          attachment: {
-              type: "template",
-              payload: {
-                  template_type: "button",
-                  text: "What is it that you would like help with?",
-                  buttons: [{
-                      type: "postback",
-                      title: "Social Media Marketing",
-                      payload: "social_media"
-                  }, {
-                      type: "postback",
-                      title: "Coaching & Training",
-                      payload: "coaching"
-                  }, {
-                      type: "postback",
-                      title: "Website",
-                      payload: "website"
-                  }]
-              }
-          }
-      }
-  };
-
-  callSendAPI(messageData);
 }
 
 
