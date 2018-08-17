@@ -1,12 +1,3 @@
-/*
- * Copyright 2016-present, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
 'use strict';
 
 const
@@ -19,17 +10,6 @@ const
 // Sets server port and logs message on success
 app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
 
-/*
- * Be sure to setup your config values before running this code. You can
- * set them using environment variables or modifying the config file in /config.
- *
- */
-
-// App Secret can be retrieved from the App Dashboard
-/*
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
-    process.env.MESSENGER_APP_SECRET :
-    config.get('appSecret');*/
 
 // Arbitrary value used to validate a webhook
 const VERIFY_TOKEN = "myToken";
@@ -188,7 +168,6 @@ function sendTextMessage(recipientId, postback) {
 /*
  * Handles get started button response
  */
-
 function sendGetStarted(recipientId) {
   request({
     url: `${'https://graph.facebook.com/v2.6/'}${recipientId}`,
@@ -208,7 +187,7 @@ function sendGetStarted(recipientId) {
       greeting = "Hi " + name + "! 👋 ";
     }
     const message = greeting + "Thank you for contacting Activate Biz! \nWhat is it that you would like help with?";
-/*
+
     var messageData = {
         recipient: {
             id: recipientId
@@ -236,43 +215,6 @@ function sendGetStarted(recipientId) {
             }
         }
     };
-*/
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "generic",
-                    "elements" : [
-                      {
-                        "title": "Example Title",
-                        "subtitle": message,
-                        "buttons": [{
-                            type: "postback",
-                            title: "Social Media Marketing",
-                            payload: "social_media"
-                        }, {
-                            type: "postback",
-                            title: "Coaching & Training",
-                            payload: "coaching"
-                        }, {
-                            type: "postback",
-                            title: "Website",
-                            payload: "website"
-                        }]
-                      }
-
-                    ]
-
-                }
-            }
-        }
-    };
-
-
 
     let callSent = callSendAPI(messageData);
   });
