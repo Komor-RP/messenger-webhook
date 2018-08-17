@@ -167,9 +167,9 @@ function sendTextMessage(recipientId, postback) {
     } else if (postback === "coaching") {
       messageText = coachingResponse;
     } else if (postback === "website") {
-      messageText == websiteResponse;
+      messageText = websiteResponse;
     } else {
-
+      messageText = "";
     }
 
     console.log(messageText);
@@ -183,6 +183,7 @@ function sendTextMessage(recipientId, postback) {
         }
     };
     console.log(messageData);
+    console.log("end");
     callSendAPI(messageData);
 }
 
