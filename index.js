@@ -57,11 +57,9 @@ app.post('/webhook', function (req, res) {
                       if (messagingEvent.message.is_echo) {
                         console.log("echo");
                       } else {
-                          console.log('IF MESSAGING EVENT');
                           receivedMessage(messagingEvent);
                       }
                     } else if (messagingEvent.postback) {
-                        console.log('RECEIVED MESSAGE POSTBACK COUNTER');
                         receivedPostback(messagingEvent);
                     } else {
                         console.log("Webhook received unknown messagingEvent: ", messagingEvent);
@@ -216,7 +214,7 @@ function sendGetStarted(recipientId) {
         }
     };
 
-    let callSent = callSendAPI(messageData);
+    callSendAPI(messageData);
   });
 
 }
