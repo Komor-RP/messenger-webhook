@@ -208,7 +208,7 @@ function sendGetStarted1(recipientId) {
       console.log("name: " + name);
       greeting = "Hi " + name + "! 👋 ";
     }
-    const message = greeting + "Thank you for contacting Activate Biz!";
+    const message = greeting + "Thank you for contacting Activate Biz! \n testing";
     var messageData = {
         recipient: {
             id: recipientId
