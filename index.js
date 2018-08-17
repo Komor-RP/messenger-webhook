@@ -172,6 +172,8 @@ function sendTextMessage(recipientId, postback) {
 
     }
 
+    console.log(messageText);
+
     var messageData = {
         recipient: {
             id: recipientId
@@ -180,6 +182,7 @@ function sendTextMessage(recipientId, postback) {
             text: messageText
         }
     };
+    console.log(messageData);
     callSendAPI(messageData);
 }
 
