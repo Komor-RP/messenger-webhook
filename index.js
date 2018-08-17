@@ -75,7 +75,7 @@ app.post('/webhook', function (req, res) {
 
                     if (messagingEvent.message) {
                       if (messagingEvent.message.is_echo) {
-                        console.log("ECHO");
+                        console.log("echo");
                       } else {
                           console.log('IF MESSAGING EVENT');
                           receivedMessage(messagingEvent);
@@ -137,7 +137,8 @@ function receivedPostback(event) {
 
     switch (payload) {
         case 'get_started':
-            sendGetStarted(senderID);
+            let firstSent = sendGetStarted1(senderID);
+            sendGetStarted2(senderID, firstSent);
             break;
         case 'social_media':
             sendTextMessage(senderID, "social_media");
@@ -189,7 +190,7 @@ function sendTextMessage(recipientId, postback) {
  * Handles get started button response
  */
 
-function sendGetStarted(recipientId) {
+function sendGetStarted1(recipientId) {
   request({
     url: `${'https://graph.facebook.com/v2.6/'}${recipientId}`,
     qs: {
@@ -208,7 +209,7 @@ function sendGetStarted(recipientId) {
       greeting = "Hi " + name + "! 👋 ";
     }
     const message = greeting + "Thank you for contacting Activate Biz!";
-    var messageData1 = {
+    var messageData = {
         recipient: {
             id: recipientId
         },
@@ -216,40 +217,42 @@ function sendGetStarted(recipientId) {
             text: message
         }
     };
-    let callSent = callSendAPI(messageData1);
-    callSendAPI(messageData2);
+    let callSent = callSendAPI(messageData);
   });
 
-    var messageData2 = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            attachment: {
-                type: "template",
-                payload: {
-                    template_type: "button",
-                    text: "What is it that you would like help with?",
-                    buttons: [{
-                        type: "postback",
-                        title: "Social Media Marketing",
-                        payload: "social_media"
-                    }, {
-                        type: "postback",
-                        title: "Coaching & Training",
-                        payload: "coaching"
-                    }, {
-                        type: "postback",
-                        title: "Website",
-                        payload: "website"
-                    }]
-                }
-            }
-        }
-    };
 }
 
+function sendGetStarted2(recipientId, sendGetStarted1) {
+  var messageData = {
+      recipient: {
+          id: recipientId
+      },
+      message: {
+          attachment: {
+              type: "template",
+              payload: {
+                  template_type: "button",
+                  text: "What is it that you would like help with?",
+                  buttons: [{
+                      type: "postback",
+                      title: "Social Media Marketing",
+                      payload: "social_media"
+                  }, {
+                      type: "postback",
+                      title: "Coaching & Training",
+                      payload: "coaching"
+                  }, {
+                      type: "postback",
+                      title: "Website",
+                      payload: "website"
+                  }]
+              }
+          }
+      }
+  };
 
+  callSendAPI(messageData);
+}
 
 
 /*
