@@ -141,6 +141,7 @@ function receivedPostback(event) {
             break;
         case 'social_media':
             sendTextMessage(senderID, "social_media");
+            break;
         case 'coaching':
             sendTextMessage(senderID, "coaching");
             break;
