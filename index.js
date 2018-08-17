@@ -246,21 +246,27 @@ function sendGetStarted(recipientId) {
                 type: "template",
                 payload: {
                     template_type: "generic",
-                    title: "Example Title",
-                    text: message,
-                    buttons: [{
-                        type: "postback",
-                        title: "Social Media Marketing",
-                        payload: "social_media"
-                    }, {
-                        type: "postback",
-                        title: "Coaching & Training",
-                        payload: "coaching"
-                    }, {
-                        type: "postback",
-                        title: "Website",
-                        payload: "website"
-                    }]
+                    "elements" : [
+                      {
+                        "title": "Example Title",
+                        "subtitle": message,
+                        "buttons": [{
+                            type: "postback",
+                            title: "Social Media Marketing",
+                            payload: "social_media"
+                        }, {
+                            type: "postback",
+                            title: "Coaching & Training",
+                            payload: "coaching"
+                        }, {
+                            type: "postback",
+                            title: "Website",
+                            payload: "website"
+                        }]
+                      }
+
+                    ]
+
                 }
             }
         }
