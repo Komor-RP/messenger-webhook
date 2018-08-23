@@ -220,7 +220,7 @@ function sendGetStarted(recipientId) {
                 content_type: "text",
                 title: "Social Media",
                 payload: "social media"
-              }
+              },
               {
                 content_type: "text",
                 title: "Website",
