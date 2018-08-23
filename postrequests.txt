@@ -1,23 +1,12 @@
-//Get Started Button
-curl -X POST -H "Content-Type: application/json" -d '{
-"get_started":{
-    "payload":"Get Started!"
-}
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEfwBBiXoUBAFgKkDNmhd9kZB98ZBCPr3SZAilMRtckXqLwoFkUEsYe5upZAhK7j32hIhooaZBWz7laRMz1PtnYAeuR3MEMEb9Lp8nktbwy4l1oypTjvhJhUbEj3MbhOiL5MvapCvJxZBweKY5XpNcP7fR8U5ms1P2sE9u7nEEQZDZD"
-
-
-curl -X POST -H "Content-Type: application/json" -d '{
-  "get_started": {"payload": "Hi! 👋 What can I help you with?"}
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEfwBBiXoUBAFgKkDNmhd9kZB98ZBCPr3SZAilMRtckXqLwoFkUEsYe5upZAhK7j32hIhooaZBWz7laRMz1PtnYAeuR3MEMEb9Lp8nktbwy4l1oypTjvhJhUbEj3MbhOiL5MvapCvJxZBweKY5XpNcP7fR8U5ms1P2sE9u7nEEQZDZD"
-
-
-
 //Get List of Postback Settings
 curl -X GET "https://graph.facebook.com/v2.6/me/messenger_profile?fields=get_started&access_token=EAAEfwBBiXoUBAFgKkDNmhd9kZB98ZBCPr3SZAilMRtckXqLwoFkUEsYe5upZAhK7j32hIhooaZBWz7laRMz1PtnYAeuR3MEMEb9Lp8nktbwy4l1oypTjvhJhUbEj3MbhOiL5MvapCvJxZBweKY5XpNcP7fR8U5ms1P2sE9u7nEEQZDZD"
 
+//Get Started Button
 curl -X POST -H "Content-Type: application/json" -d '{
-  "get_started": {"payload": "get_started"}
-}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEfwBBiXoUBAKZAdFRIcLZCTpTNZBIruaWah6ZC20fecRxqQGtJ8WhraBdJ2ZBanoOZAMYGYEGtZBfozJ3cyGB5BqVzRBFU5Ys5fAEfEiPCdBdZANAEKYx7vzORrfV1TAtjSBi0wNPLHmkyduyaHo9Fhh6w1NuFQaMZBbx6DENoTaQZDZD"
+"get_started":{
+    "payload":"get_started"
+}
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEfwBBiXoUBAFgKkDNmhd9kZB98ZBCPr3SZAilMRtckXqLwoFkUEsYe5upZAhK7j32hIhooaZBWz7laRMz1PtnYAeuR3MEMEb9Lp8nktbwy4l1oypTjvhJhUbEj3MbhOiL5MvapCvJxZBweKY5XpNcP7fR8U5ms1P2sE9u7nEEQZDZD"
 
 // Set Description Text on Title Screen
 curl -X POST -H "Content-Type: application/json" -d '{

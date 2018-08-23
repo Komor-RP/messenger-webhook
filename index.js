@@ -179,6 +179,7 @@ function sendGetStarted(recipientId) {
     }
     const message = greeting + "Thank you for contacting Activate Biz! \nWhat is it that you would like help with?";
 
+    /*
     var messageData = {
         recipient: {
             id: recipientId
@@ -204,6 +205,29 @@ function sendGetStarted(recipientId) {
                     }]
                 }
             }
+        }
+    };
+    */
+
+    /*messagedata quick reply alternative*/
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        message: {
+            text: "Here is a quick reply!",
+            quick_replies: [
+              {
+                content_type: "text",
+                title: "Social Media",
+                payload: "social media"
+              }
+              {
+                content_type: "text",
+                title: "Website",
+                payload: "social media"
+              }
+            ]
         }
     };
 
