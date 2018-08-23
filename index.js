@@ -208,7 +208,6 @@ function sendGetStarted(recipientId) {
         }
     };
     */
-
     /*messagedata quick reply alternative*/
     var messageData = {
         recipient: {
