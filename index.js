@@ -219,12 +219,12 @@ function sendGetStarted(recipientId) {
               {
                 content_type: "text",
                 title: "Social Media",
-                payload: "social media"
+                payload: "social_media"
               },
               {
                 content_type: "text",
                 title: "Website",
-                payload: "social media"
+                payload: "social_media"
               }
             ]
         }
