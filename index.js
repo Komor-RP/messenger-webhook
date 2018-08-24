@@ -56,9 +56,6 @@ app.post('/webhook', function (req, res) {
                     if (messagingEvent.message) {
                       if (messagingEvent.message.is_echo) {
                         console.log("echo");
-                      } else if (messagingEvent.message.quick_reply){
-                        console.log("quick reply");
-                        receivedMessage(messagingEvent);
                       } else {
                           receivedMessage(messagingEvent);
                       }
@@ -87,12 +84,17 @@ function receivedMessage(event) {
     var recipientID = event.recipient.id;
     var timeOfMessage = event.timestamp;
     var message = event.message;
-
+    
     console.log("Received message for user %d and page %d at %d with message:",
         senderID, recipientID, timeOfMessage);
     console.log(JSON.stringify(message));
 
     var messageText = message.text;
+
+    if (event.message.quick_reply) {
+      console.log("QUICK REPLY");
+    }
+
 
 }
 
