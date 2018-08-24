@@ -56,6 +56,9 @@ app.post('/webhook', function (req, res) {
                     if (messagingEvent.message) {
                       if (messagingEvent.message.is_echo) {
                         console.log("echo");
+                      } else if (messagingEvent.message.quick_reply){
+                        console.log("quick reply");
+                        receivedMessage(messagingEvent);
                       } else {
                           receivedMessage(messagingEvent);
                       }
