@@ -93,7 +93,7 @@ function receivedMessage(event) {
 
     if (event.message.quick_reply) {
       console.log(event.message.quick_reply.payload);
-      receivedPostback(event.message.quick_reply.payload);
+      sendTextMessage(senderID, event.message.quick_reply.payload);
     }
 
 
