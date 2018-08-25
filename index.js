@@ -92,11 +92,33 @@ function receivedMessage(event) {
     var messageText = message.text;
 
     if (event.message.quick_reply) {
-      console.log(event.message.quick_reply.payload);
-      sendTextMessage(senderID, event.message.quick_reply.payload);
+      receivedMessageQuickReply(event);
     }
 
 
+}
+
+function receivedMessageQuickReply(event) {
+  var senderID = event.sender.id;
+  var recipientID = event.recipient.id;
+  var timeOfMessage = event.timestamp;
+  var message = event.message;
+  var payload = event.message.quick_reply.payload;
+  console.log("quick reply type: " + payload);
+
+  switch (payload) {
+    case 'social_media':
+      sendTextMessage(senderID, "social_media");
+      break;
+    case 'coaching':
+        sendTextMessage(senderID, "coaching");
+        break;
+    case 'website':
+        sendTextMessage(senderID, "website");
+        break;
+    default:
+        console.log("invalid switch" + );
+  }
 }
 
 /*
@@ -220,16 +242,36 @@ function sendGetStarted(recipientId) {
             id: recipientId
         },
         message: {
-            text: "Here is a quick reply!",
+            text: message,
             quick_replies: [
               {
                 content_type: "text",
-                title: "Social Media",
+                title: "Email Media Marketing",
                 payload: "social_media"
               },
               {
                 content_type: "text",
+                title: "Social Media Marketing",
+                payload: "social_media"
+              },
+              {
+                content_type: "text",
+                title: "Coaching & Training",
+                payload: "coaching"
+              },
+              {
+                content_type: "text",
                 title: "Website",
+                payload: "website"
+              },
+              {
+                content_type: "text",
+                title: "Ecommerce",
+                payload: "ecommerce"
+              },
+              {
+                content_type: "text",
+                title: "Graphic Design & Branding",
                 payload: "social_media"
               }
             ]
