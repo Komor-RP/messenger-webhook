@@ -117,7 +117,7 @@ function receivedMessageQuickReply(event) {
         sendTextMessage(senderID, "website");
         break;
     default:
-        console.log("invalid switch" + );
+        console.log("invalid switch" + payload);
   }
 }
 
