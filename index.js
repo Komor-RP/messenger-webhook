@@ -147,6 +147,9 @@ function receivedPostback(event) {
         case 'website':
             sendTextMessage(senderID, "website");
             break;
+        case 'contact_info':
+            sendTextMessage(senderID, "contact_info");
+            break;
         default:
             console.log("invalid switch: " + payload);
     }
@@ -160,6 +163,7 @@ function sendTextMessage(recipientId, postback) {
     let socialMediaResponse = "Great! Can you give us more details about the help you need with social media?";
     let coachingResponse = "Great! What kind of training services do you require?";
     let websiteResponse = "Great! Tell us more about your website needs!";
+    let contactResponse = "Contact Info";
 
 
     if (postback === "social_media") {
@@ -168,6 +172,8 @@ function sendTextMessage(recipientId, postback) {
       messageText = coachingResponse;
     } else if (postback === "website") {
       messageText = websiteResponse;
+    } else if (postback == "contact_info") {
+      messageText = contactResponse;
     } else {
       messageText = "";
     }
@@ -207,7 +213,7 @@ function sendGetStarted(recipientId) {
     }
     const message = greeting + "Thank you for contacting Activate Biz! \nWhat is it that you would like help with?";
 
-    /*
+
     var messageData = {
         recipient: {
             id: recipientId
@@ -218,7 +224,8 @@ function sendGetStarted(recipientId) {
                 payload: {
                     template_type: "button",
                     text: message,
-                    buttons: [{
+                    buttons: [
+                    {
                         type: "postback",
                         title: "Social Media Marketing",
                         payload: "social_media"
@@ -230,13 +237,15 @@ function sendGetStarted(recipientId) {
                         type: "postback",
                         title: "Website",
                         payload: "website"
-                    }]
+                    }
+                  ]
                 }
             }
         }
     };
-    */
+
     /*messagedata quick reply alternative*/
+    /*
     var messageData = {
         recipient: {
             id: recipientId
@@ -277,7 +286,7 @@ function sendGetStarted(recipientId) {
             ]
         }
     };
-
+    */
     callSendAPI(messageData);
   });
 

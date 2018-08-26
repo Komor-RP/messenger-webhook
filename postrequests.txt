@@ -17,3 +17,28 @@ curl -X POST -H "Content-Type: application/json" -d '{
     },
   ]
 }' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEfwBBiXoUBAKZAdFRIcLZCTpTNZBIruaWah6ZC20fecRxqQGtJ8WhraBdJ2ZBanoOZAMYGYEGtZBfozJ3cyGB5BqVzRBFU5Ys5fAEfEiPCdBdZANAEKYx7vzORrfV1TAtjSBi0wNPLHmkyduyaHo9Fhh6w1NuFQaMZBbx6DENoTaQZDZD"
+
+
+//Set Persistent Menu
+curl -X POST -H "Content-Type: application/json" -d '{
+  "persistent_menu":[
+    {
+      "locale":"default",
+      "composer_input_disabled": true,
+      "call_to_actions":[
+          {
+              "type":"web_url",
+              "title":"Website",
+              "url":"https://activatebiz.com/",
+              "webview_height_ratio":"full"
+          },
+          {
+              "title":"Contact Info",
+              "type":"postback",
+              "payload":"contact_info"
+          }
+
+      ]
+    }
+  ]
+}' "https://graph.facebook.com/v2.6/me/messenger_profile?access_token=EAAEfwBBiXoUBAFgKkDNmhd9kZB98ZBCPr3SZAilMRtckXqLwoFkUEsYe5upZAhK7j32hIhooaZBWz7laRMz1PtnYAeuR3MEMEb9Lp8nktbwy4l1oypTjvhJhUbEj3MbhOiL5MvapCvJxZBweKY5XpNcP7fR8U5ms1P2sE9u7nEEQZDZD"
