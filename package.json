@@ -1,16 +1,16 @@
 {
   "name": "messenger-webhook",
   "version": "1.0.0",
-  "description": "",
+  "description": "Facebook Messenger Webhook Bot",
+  "keywords": ["facebook", "bot", "webhook", "messenger"],
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "",
+  "author": "Fan Huang",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "config": "^1.20.4",
     "express": "^4.16.3",
     "request": "^2.88.0"
   }
