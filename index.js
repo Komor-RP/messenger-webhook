@@ -211,7 +211,7 @@ function sendGetStarted(recipientId) {
       console.log("name: " + name);
       greeting = "Hi " + name + "! 👋 ";
     }
-    const message = greeting + "Thank you for contacting Activate Biz! \nWhat is it that you would like help with?";
+    const message = greeting + "Thank you for contacting Activate Biz! \n \nWe have automated answers and real people.😉\n \nActivate chat is managed by both a bot and humans!\n \nWhat is it that you would like help with?";
 
 
     var messageData = {
